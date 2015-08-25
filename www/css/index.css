@@ -3,6 +3,7 @@ body{background:#f2f2f2;}
 	width:100%;
 	z-index:1;
 }
+*{font-family:Iranian_Sans,tahoma  !important;}
 #exit-btn0{
 	width:100px;
 	height:100px;
