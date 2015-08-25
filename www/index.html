@@ -152,8 +152,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 // START push Notification :////////////////////////////////////////////////////////////////
-			if(window.localStorage.getItem('register_for_notifs') == null)
-			{
+			//if(window.localStorage.getItem('register_for_notifs') == null)
+			//{
 				pushNotification = window.plugins.pushNotification;
 				console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    register_for_notifs : no // ' + device.platform);
 				if ( device.platform == 'android' || device.platform == 'Android' || device.platform == "amazon-fireos" ){
@@ -161,7 +161,7 @@
 				} else {
 					pushNotification.register(tokenHandler,errorHandler,{"badge":"true","sound":"true","alert":"true","ecb":"onNotificationGCM"});//"onNotificationAPN"});
 				}
-			}
+			//}
 
 			function tokenHandler(result) {
 				console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    Notification Callback Success! Result (ios) = '+result);
