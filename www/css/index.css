@@ -1,0 +1,203 @@
+body{background:#f2f2f2;}
+#main{
+	width:100%;
+	z-index:1;
+}
+#exit-btn0{
+	width:100px;
+	height:100px;
+	overflow:hidden;
+	position:fixed;
+	top:0;
+	left:0;
+	background:url('../images/exit.png') no-repeat 0 0;
+	background-size:cover;
+	cursor:pointer;
+	z-index:2;
+}
+#header{
+	width:100%;
+	background:#00bab9;
+	height:110px;
+	text-align:center;
+	position:fixed;
+	top:0;
+	left:0;
+	z-index:1000;
+	box-shadow:0px 0px 0 rgba(255, 255, 255, 0.9) inset, 0px 0px 0 rgba(255, 255, 255, 0.9) inset, 0 0 4px #aaa;/*-1px -1px 0 rgba(255, 255, 255, 0.9) inset, 1px 1px 0 rgba(255, 255, 255, 0.9) inset, 0 0 5px #aaa;*/
+}
+.text {
+  padding-left: 20px;
+}
+#footer{
+	width:100%;
+	background:#00bab9 ;
+	height:44px;
+	text-align:center;
+	position:fixed;
+	bottom:0;
+	left:0;
+	z-index:1000;
+	box-shadow:0px 0px 0 rgba(255, 255, 255, 0.9) inset, 0px 0px 0 rgba(255, 255, 255, 0.9) inset, 0 0 4px #aaa;/*-1px -1px 0 rgba(255, 255, 255, 0.9) inset, 1px 1px 0 rgba(255, 255, 255, 0.9) inset, 0 0 5px #aaa;*/
+}
+#header-inner {
+  bottom: 7px;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: bold;
+  left: calc(50% - 100px);
+  position: absolute;
+}
+#logo{
+	width:80px;
+	height:80px;
+	background-size:cover;
+	border-radius:39px;
+	background-color:#8ba8b7;
+}
+table,thead,tbody,tr,th{direction:rtl;}
+.ejtemaei{background:url('../images/services/ejtemaei.png') no-repeat 0 0;}
+.beynolmelal{background:url('../images/services/beynolmelal.png') no-repeat 0 0;}
+.daneshgah{background:url('../images/services/daneshgah.png') no-repeat 0 0;}
+.drsalam{background:url('../images/services/dr-salam.png') no-repeat 0 0;}
+.eghtesadi{background:url('../images/services/eghtesadi.png') no-repeat 0 0;}
+.havades{background:url('../images/services/havades.png') no-repeat 0 0;}
+.siyasi{background:url('../images/services/siyasi.png') no-repeat 0 0;}
+.varzeshi{background:url('../images/services/varzeshi.png') no-repeat 0 0;}
+.blank{background:url('../images/services/blank.png') no-repeat 0 0;}
+
+.logo{width:80px;padding-right:20px;}
+.img-border{width:16px;}
+#date {
+  color: #9b9b9b;
+  float: left;
+  font-size: 11px;
+  margin-bottom: -16px;
+  margin-left: 2px;
+  margin-top: 3px;
+}
+#img-border-inner{
+	background:url('../images/middel.png') no-repeat 0 0;
+	background-size:cover;
+	width:9px;
+	height:20px;
+	margin-top:8px;
+	margin-left:-3px;
+	float:left;
+}
+#text {
+  background: none repeat scroll 0 0 #00bab9;
+  border-radius: 10px;
+  color:#ffffff;
+  padding:8px 10px;
+  min-height:80px;
+  text-align:justify;
+}
+.spacer {height: 42px;}
+.end {height: 80px;}
+.start {height: 152px;}
+#info{
+	width:41px;
+	height:41px;
+	position:absolute;
+	bottom:20px;
+	left:30px;
+	background:url('../images/info.png') no-repeat 0 0;
+	background-size:cover;
+	cursor:pointer;
+	z-index:2;
+}
+#info-footer{
+	width:42px;
+	height:46px;
+	position:absolute;
+	top:-7px;
+	left:calc(50% - 17px);
+	background:url('../images/footer.png') no-repeat 0 0;
+	background-size:cover;
+	cursor:pointer;
+	z-index:2;
+}
+.header-text{
+	width:200px;
+	height:55px;
+	background:url('../images/text-last-news.png') no-repeat 0 0;
+	background-size:cover;
+}
+#header-logo {
+  background: url("../images/logo.png") no-repeat scroll 0 0 / cover  rgba(0, 0, 0, 0);
+  float: right;
+  height: 69px;
+  margin-right: 19px;
+  margin-top: 24px;
+  width: 100px;
+}
+a {
+  color: #fff845;
+  display: block;
+  font-weight: bold;
+  margin-top: 5px;
+  text-decoration: none;
+}
+
+
+@media (max-width: 600px) {
+	.date {
+	  padding-bottom: 5px;
+	  padding-left: 4px;
+	  padding-right: 14px;
+	  vertical-align: bottom;
+	  width: 45px;
+	}
+	#logo{
+		width:60px;
+		height:60px;
+		background-size:cover;
+		border-radius:29px;
+	}
+	.logo {
+	  padding-right: 10px;
+	  width: 60px;
+	}
+	.spacer {
+	  height: 28px;
+	}
+	#info {
+	  bottom: 10px;
+	  height: 35px;
+	  left: 10px;
+	  width: 35px;
+	}
+	.header-text {
+	  height: 33px;
+	  width: 144px;
+	}
+	#header-inner {
+	  bottom: 13px;
+	  left: calc(50% - 72px);
+	}
+	#header {
+	  height: 83px;
+	}
+	.start {
+	  height: 106px;
+	}
+	.img-border {
+	  width: 9px;
+	}
+	.end {
+	  height: 38px;
+	}
+	#text {
+	  min-height:60px;
+	}
+	.text {
+	  padding-left: 10px;
+	}
+	#header-logo {
+	  height: 35px;
+	  margin-right: 8px;
+	  margin-top: 37px;
+	  width: 50px;
+	}
+}
