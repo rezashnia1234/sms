@@ -33,7 +33,7 @@
 // START push Notification :////////////////////////////////////////////////////////////////
 	 var register_for_notifs;// = window.localStorage.getItem('register_for_notifs');
 	 function onNotificationGCM(e) {
-		//alert("uuuuuu");
+		alert(2);
 		//$("#app-status-ul").append('<li>EVENT -> RECEIVED:' + e.event + '</li>');
 
 		switch( e.event )
@@ -56,6 +56,7 @@
 								//last_articles_version = text;
 								console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    Notification registration text : ' + text);
 								window.localStorage.setItem('register_for_notifs','yes');
+								alert(3);
 							}
 					});
 				//}
@@ -154,6 +155,7 @@
 // START push Notification :////////////////////////////////////////////////////////////////
 			//if(window.localStorage.getItem('register_for_notifs') == null)
 			//{
+				alert(1);
 				pushNotification = window.plugins.pushNotification;
 				console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    register_for_notifs : no // ' + device.platform);
 				if ( device.platform == 'android' || device.platform == 'Android' || device.platform == "amazon-fireos" ){
@@ -166,6 +168,7 @@
 			function tokenHandler(result) {
 				console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    Notification Callback Success! Result (ios) = '+result);
 				//if(register_for_notifs){
+					alert(0);
 					$.ajax({ type: "POST",
 							url: "http://notif.smgroup.ir/SMCMS_notification/RegisterDeviceIDtoDB.php", 
 							data: {regID : result,user:window.localStorage.getItem('uuid'),OS:device.platform},
@@ -240,7 +243,7 @@
 	<div id="temp"></div>
 	<div id="exit-btn" onclick="exit();"></div>
 	<div id="header">
-		<div id="header-inner" class="header-text"></div>
+		<!--<div id="header-inner" class="header-text"></div>-->
 	</div>
 	<div id="footer">
 		<!--<a href="info.html"><div id="info-footer"></div></a>-->
