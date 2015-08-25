@@ -96,7 +96,7 @@ table,thead,tbody,tr,th{direction:rtl;}
 }
 .spacer {height: 42px;}
 .end {height: 80px;}
-.start {height: 78px;}
+.start {height: 78px !important;}
 #info{
 	width:41px;
 	height:41px;
