@@ -18,7 +18,7 @@ body{background:#f2f2f2;}
 #header{
 	width:100%;
 	background:#00bab9;
-	height:110px;
+	height:48px;
 	text-align:center;
 	position:fixed;
 	top:0;
@@ -45,8 +45,7 @@ body{background:#f2f2f2;}
   color: #ffffff;
   font-size: 14px;
   font-weight: bold;
-  left: calc(50% - 100px);
-  position: absolute;
+  margin:0 auto;
 }
 #logo{
 	width:80px;
@@ -95,7 +94,7 @@ table,thead,tbody,tr,th{direction:rtl;}
 }
 .spacer {height: 42px;}
 .end {height: 80px;}
-.start {height: 152px;}
+.start {height: 78px;}
 #info{
 	width:41px;
 	height:41px;
@@ -110,9 +109,7 @@ table,thead,tbody,tr,th{direction:rtl;}
 #info-footer{
 	width:42px;
 	height:46px;
-	position:absolute;
-	top:-7px;
-	left:calc(50% - 17px);
+	margin:-11px auto 0 auto;
 	background:url('../images/footer.png') no-repeat 0 0;
 	background-size:cover;
 	cursor:pointer;
