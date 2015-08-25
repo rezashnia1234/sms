@@ -168,19 +168,12 @@ a {
 	  width: 35px;
 	}
 	.header-text {
-	  height: 33px;
-	  width: 144px;
+	  background-position: center center;
+	  height: 45px;
+	  top: -2px;
+	  width: 170px;
 	}
-	#header-inner {
-	  bottom: 13px;
-	  left: calc(50% - 72px);
-	}
-	#header {
-	  height: 83px;
-	}
-	.start {
-	  height: 106px;
-	}
+
 	.img-border {
 	  width: 9px;
 	}
@@ -193,10 +186,5 @@ a {
 	.text {
 	  padding-left: 10px;
 	}
-	#header-logo {
-	  height: 35px;
-	  margin-right: 8px;
-	  margin-top: 37px;
-	  width: 50px;
-	}
+
 }
