@@ -26,6 +26,7 @@ body{background:#f2f2f2;}
 	left:0;
 	z-index:1000;
 	box-shadow:0px 0px 0 rgba(255, 255, 255, 0.9) inset, 0px 0px 0 rgba(255, 255, 255, 0.9) inset, 0 0 4px #aaa;/*-1px -1px 0 rgba(255, 255, 255, 0.9) inset, 1px 1px 0 rgba(255, 255, 255, 0.9) inset, 0 0 5px #aaa;*/
+	overflow: hidden;
 }
 .text {
   padding-left: 20px;
