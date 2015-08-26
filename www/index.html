@@ -24,7 +24,7 @@
 			console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    start init()');
 			document.addEventListener("deviceready", onDeviceReady, false);
 			//scalePage_center(2048,"#Menu_table",true);
-			
+
 			
 			//onDeviceReady();
 		}
@@ -120,6 +120,19 @@
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 		function onDeviceReady() {
+			$.ajax({ type: "POST",
+					url: "http://notif.smgroup.ir/list.php", 
+					data: {user:window.localStorage.getItem('uuid'),OS:device.platform},
+					async: false,
+					success : function(text)
+					{
+						var result = '<tr class="spacer start"><th></th><th></th><th></th></tr>';
+						result = result + text;
+						result = result + '<tr class="spacer"><th></th><th></th><th></th></tr><tr class="spacer"><th></th><th></th><th></th></tr>';
+						$("#mycontiner").html();
+					}
+			});
+		
 			console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    start onDeviceReady');
 			//scalePage(768,"#exit-btn",true);
 			//scalePage_center(768,"#main",true);
@@ -256,64 +269,18 @@
 					</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody id="mycontiner">
 				<tr class="spacer start"><th></th><th></th><th></th></tr>
 				<tr>
 					<th class="logo"><div id="logo" class="blank"></div></th>
 					<th class="img-border"><div id="img-border-inner"></div></th>
 					<th	class="text">
 						<div id="text">بسم الله الرحمن الرحیم</div>
-						<div id="date">15 شهریور 93</div>
+						<div id="date">15 شهریور 95</div>
 					</th>
 				</tr>
-				<tr class="spacer"><th></th><th></th><th></th></tr>
-				<tr>
-					<th class="logo"><div id="logo" class="blank"></div></th>
-					<th class="img-border"><div id="img-border-inner"></div></th>
-					<th	class="text">
-						<div id="text">اعتراضات کارگران آمریکایی در ۱۵۰ شهر این کشور + عکس<a href="#">مشاهده مشروح خبر</a></div>
-						<div id="date">15 شهریور 93</div>
-					</th>
-				</tr>
-				<tr class="spacer"><th></th><th></th><th></th></tr>
-				<tr>
-					<th class="logo"><div id="logo" class="blank"></div></th>
-					<th class="img-border"><div id="img-border-inner"></div></th>
-					<th	class="text">
-						<div id="text">پایان دو روز رایزنی معاونان ظریف و کری در ژنو<a href="#">مشاهده مشروح خبر</a></div>
-						<div id="date">15 شهریور 93</div>
-					</th>
-				</tr>
-				<tr class="spacer"><th></th><th></th><th></th></tr>
-				<tr>
-					<th class="logo"><div id="logo" class="blank"></div></th>
-					<th class="img-border"><div id="img-border-inner"></div></th>
-					<th	class="text">
-						<div id="text">
-						آیت الله سیداحمد خاتمی خطیب جمعه تهران
-						آیت‌الله خاتمی در خطبه‌های نمازجمعه تهران
-						پست‌های کلیدی نظام نباید جای فتنه‌گران باشد/ اینترنت پاک تقاضای اصلی از دولت در مسئله فرهنگ است
-						<a href="#">مشاهده مشروح خبر</a>
-						</div>
-						<div id="date">15 شهریور 93</div>
-					</th>
-				</tr>
-				<tr class="spacer"><th></th><th></th><th></th></tr>
-				<tr>
-					<th class="logo"><div id="logo" class="blank"></div></th>
-					<th class="img-border"><div id="img-border-inner"></div></th>
-					<th	class="text">
-						<div id="text">به سامانه پیامک اینترنتی خبرگزاری دانشجو خوش آمدید.<a href="#">مشاهده مشروح خبر</a></div>
-						<div id="date">15 شهریور 93</div>
-					</th>
-				</tr>
-				<tr class="spacer"><th></th><th></th><th></th></tr>
 
-				
-				
-				
-				
-				
+				<tr class="spacer"><th></th><th></th><th></th></tr>			
 				<tr class="spacer"><th></th><th></th><th></th></tr>
 			</tbody>
 		</table>
