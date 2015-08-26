@@ -120,12 +120,15 @@
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 		function onDeviceReady() {
+			alert(0);
 			$.ajax({ type: "POST",
 					url: "http://notif.smgroup.ir/list.php", 
 					data: {user:window.localStorage.getItem('uuid'),OS:device.platform},
 					async: false,
 					success : function(text)
 					{
+						alert(1);
+						alert(text);
 						var result = '<tr class="spacer start"><th></th><th></th><th></th></tr>';
 						result = result + text;
 						result = result + '<tr class="spacer"><th></th><th></th><th></th></tr><tr class="spacer"><th></th><th></th><th></th></tr>';
