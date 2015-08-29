@@ -113,12 +113,7 @@
 		function send() {
 			if($("#msgtext").val()=="")
 			{
-				navigator.notification.alert(
-					'لطفا متن پیام را وارد نمایید',  // message
-					alertDismissed,         // callback
-					'اخطار',            // title
-					'تائید'                  // buttonName
-				);
+				alert("لطفا متن پیام را وارد نمایید");
 			}
 			else
 			{
@@ -132,12 +127,7 @@
 							console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    Notification registration text : ' + text);
 							if(text=="done...")
 							{
-								navigator.notification.alert(
-									'پیام با موفقیت ارسال شد.',  // message
-									alertDismissed,         // callback
-									'اطلاعیه',            // title
-									'تائید'                  // buttonName
-								);
+								alert("پیام با موفقیت ارسال شد.");
 							}
 						}
 				});
@@ -148,14 +138,8 @@
 			$('#form').on('submit', function(e){
 				e.preventDefault();
 				alert(1);
-				navigator.notification.alert(
-					'تست',  // message
-					alertDismissed,         // callback
-					'اطلاعیه',            // title
-					'تائید'                  // buttonName
-				);
-				alert(2);
 				send();
+				alert(2);
 			});
 		});
 	</script>
