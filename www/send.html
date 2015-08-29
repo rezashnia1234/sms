@@ -143,6 +143,13 @@
 				});
 			}
 		}
+
+		$(document).ready(function(){
+			$('#form').on('submit', function(e){
+				e.preventDefault();
+				send();
+			});
+		});
 	</script>
 
 
@@ -161,9 +168,11 @@
 		<a href="index.html"><div id="info-footer" class="home"></div></a>
 	</div>
 	<div id="main" style="text-align: center;">
-		<textarea name="text" placeholder="متن اطلاعیه..." id="msg-text" style="padding:7px 10px;width: 90%; margin-top: 67px; height: 100px;"></textarea>
-		<br/>
-		<button id="button" onclick="send();" style="padding:7px 10px; margin-top: 12px;width: 40%;">ارسال</button>
+		<form id="form">
+			<textarea name="text" placeholder="متن اطلاعیه..." id="msg-text" style="padding:7px 10px;width: 90%; margin-top: 67px; height: 100px;"></textarea>
+			<br/>
+			<input type="submit" value="ارسال" id="button"  style="padding:7px 10px; margin-top: 12px;width: 40%;">
+		</form>
 	</div>
 </body>
 </html>
