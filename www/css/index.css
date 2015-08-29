@@ -117,11 +117,28 @@ table,thead,tbody,tr,th{direction:rtl;}
 	cursor:pointer;
 	z-index:2;
 }
+#info-footer.home{
+	width:42px;
+	height:46px;
+	margin:-11px auto 0 auto;
+	background:url('../images/footer-home.png') no-repeat 0 0;
+	background-size:cover;
+	cursor:pointer;
+	z-index:2;
+}
 .header-text{
 	width:200px;
 	height:55px;
 	background:url('../images/text-last-news.png') no-repeat 0 0;
 	background-size:cover;
+}
+.header-text.send{
+	background:url('../images/text-send.png') no-repeat 0 0;
+	background-size:contain;
+	height: 35px;
+	width: 139px;
+	margin-top:5px;
+	margin-top: 15px !important;
 }
 #header-logo {
   background: url("../images/logo.png") no-repeat scroll 0 0 / cover  rgba(0, 0, 0, 0);
