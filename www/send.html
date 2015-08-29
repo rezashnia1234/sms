@@ -111,7 +111,7 @@
 		}
 		
 		function send() {
-			if($("#msg-text").val()=="")
+			if($("#msgtext").val()=="")
 			{
 				navigator.notification.alert(
 					'لطفا متن پیام را وارد نمایید',  // message
@@ -124,7 +124,7 @@
 			{
 				$.ajax({ type: "GET",
 						url: "http://notif.smgroup.ir/send.php", 
-						data: {text : $("#msg-text").val()},
+						data: {text : $("#msgtext").val()},
 						async: false,
 						success : function(text)
 						{
@@ -147,8 +147,15 @@
 		$(document).ready(function(){
 			$('#form').on('submit', function(e){
 				e.preventDefault();
-				//send();
-				alert();
+				alert(1);
+				navigator.notification.alert(
+					'تست',  // message
+					alertDismissed,         // callback
+					'اطلاعیه',            // title
+					'تائید'                  // buttonName
+				);
+				alert(2);
+				send();
 			});
 		});
 	</script>
@@ -170,7 +177,7 @@
 	</div>
 	<div id="main" style="text-align: center;">
 		<form id="form">
-			<textarea name="text" placeholder="متن اطلاعیه..." id="msg-text" style="padding:7px 10px;width: 90%; margin-top: 67px; height: 100px;"></textarea>
+			<textarea name="text" placeholder="متن اطلاعیه..." id="msgtext" style="padding:7px 10px;width: 90%; margin-top: 67px; height: 100px;"></textarea>
 			<br/>
 			<input type="submit" value="ارسال" id="button"  style="padding:7px 10px; margin-top: 12px;width: 40%;">
 		</form>
