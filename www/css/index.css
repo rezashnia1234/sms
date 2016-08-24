@@ -93,6 +93,7 @@ table,thead,tbody,tr,th{direction:rtl;}
   padding:8px 10px;
   min-height:80px;
   text-align:justify;
+  word-break: break-all;
 }
 .spacer {height: 42px;}
 .end {height: 80px;}

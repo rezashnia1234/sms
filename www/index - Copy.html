@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"   >
+<head>
+	<meta name="format-detection" content="telephone-no">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1" />
+
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<link rel="stylesheet" href="css/reset.css" type="text/css" /> 
+	<link rel="stylesheet" href="css/font.css"  type="text/css" />
+	<link rel="stylesheet" href="css/index.css" type="text/css" /> 
+
+
+	<title></title>
+	
+	<script src="js/jquery-1.11.0.min.js"></script>
+    <script src="phonegap.js"></script>
+	<script src="js/fastclick.js" type="text/javascript"></script>
+	<script src="js/scale.js" type="text/javascript"></script>
+	<script src="PushNotification.js" type="text/javascript" ></script>
+
+	<script>
+		function init() {		
+			console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    start init()');
+			document.addEventListener("deviceready", onDeviceReady, false);
+			//scalePage_center(2048,"#Menu_table",true);
+
+			
+			//onDeviceReady();
+		}
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+// START push Notification :////////////////////////////////////////////////////////////////
+	 var register_for_notifs;// = window.localStorage.getItem('register_for_notifs');
+	 function onNotificationGCM(e) {
+		//$("#app-status-ul").append('<li>EVENT -> RECEIVED:' + e.event + '</li>');
+
+		switch( e.event )
+		{
+		case 'registered':
+			if ( e.regid.length > 0 )
+			{
+				//$("#app-status-ul").append('<li>REGISTERED -> REGID:' + e.regid + "</li>");
+				// Your GCM push server needs to know the regID before it can push to this device
+				// here is where you might want to send it the regID for later use.
+				//console.log("regID = " + e.regid);
+				//alert("regID = " + e.regid);
+				//if(register_for_notifs){
+					$.ajax({ type: "POST",
+							url: "http://notif.smgroup.ir/SMCMS_notification/RegisterDeviceIDtoDB.php", 
+							data: {regID : e.regid,user:window.localStorage.getItem('uuid'),OS:device.platform},
+							async: false,
+							success : function(text)
+							{
+								//last_articles_version = text;
+								console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    Notification registration text : ' + text);
+								if(text=="0")
+								{
+									window.localStorage.setItem('register_for_notifs','yes');
+								}
+							}
+					});
+				//}
+			}
+		break;
+
+		case 'message':
+			// if this flag is set, this notification happened while we were in the foreground.
+			// you might want to play a sound to get the user's attention, throw up a dialog, etc.
+			if ( e.foreground )
+			{
+				//$("#app-status-ul").append('<li>--INLINE NOTIFICATION--' + '</li>');
+
+				// if the notification contains a soundname, play it.
+				//var my_media = new Media("/android_asset/www/"+e.soundname);
+				//my_media.play();
+			}
+			else
+			{  // otherwise we were launched because the user touched a notification in the notification tray.
+				/*
+				if ( e.coldstart )
+				{
+					$("#app-status-ul").append('<li>--COLDSTART NOTIFICATION--' + '</li>');
+				}
+				else
+				{
+					$("#app-status-ul").append('<li>--BACKGROUND NOTIFICATION--' + '</li>');
+				}
+				*/
+			}
+			
+			//alert(e.payload.message);
+			navigator.notification.alert(
+				e.payload.message,  // message
+				alertDismissed,         // callback
+				'اطلاعیه',            // title
+				'تائید'                  // buttonName
+			);
+			//alert(e.payload.msgcnt);
+			/*
+			$("#app-status-ul").append('<li>MESSAGE -> MSG: ' + e.payload.message + '</li>');
+			$("#app-status-ul").append('<li>MESSAGE -> MSGCNT: ' + e.payload.msgcnt + '</li>');
+			*/
+		break;
+
+		case 'error':
+			//$("#app-status-ul").append('<li>ERROR -> MSG:' + e.msg + '</li>');
+		break;
+
+		default:
+			//$("#app-status-ul").append('<li>EVENT -> Unknown, an event was received and we do not know what it is</li>');
+		break;
+	  }
+	}
+	function successHandler (result) {
+		//alert('result = ' + result);
+	}
+	// result contains any error description text returned from the plugin call
+	function errorHandler (error) {
+		//alert('error = ' + error);
+	}
+// END push Notification ///////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+		function onDeviceReady() {
+			$.ajax({ type: "POST",
+					url: "http://notif.smgroup.ir/list.php", 
+					data: {user:window.localStorage.getItem('uuid'),OS:device.platform},
+					async: false,
+					success : function(text)
+					{
+						var result = '<tr class="spacer start"><th></th><th></th><th></th></tr>';
+						result = result + text;
+						result = result + '<tr class="spacer"><th></th><th></th><th></th></tr><tr class="spacer"><th></th><th></th><th></th></tr>';
+						$("#mycontiner").html(result);
+					}
+			});
+		
+			console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    start onDeviceReady');
+			//scalePage(768,"#exit-btn",true);
+			//scalePage_center(768,"#main",true);
+			
+			if(window.sessionStorage.getItem('session_rand') == null)
+			{
+				window.sessionStorage.setItem('session_rand',Math.random());				
+			}
+
+			if(window.localStorage.getItem('uuid') == null)
+				window.plugins.uniqueDeviceID.get(uniqueDeviceIDsuccess_index, uniqueDeviceIDfail_index);
+			else
+			{
+				
+			}
+			window.sessionStorage.setItem('we_are_in',"index");
+			//FastClick.attach(document.getElementById('container'));
+			FastClick.attach(document.body);
+			
+			if ( device.platform == 'Android' ){//Android,iOS,win7=WinCE,win8=Win32NT
+				document.addEventListener("backbutton", go_back_index, false);
+			}
+			if(window.sessionStorage.getItem('LOAD_URL') == null)
+			{
+				window.sessionStorage.setItem('LOAD_URL',JSON.stringify(["786","110"]));				
+			}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+// START push Notification :////////////////////////////////////////////////////////////////
+			if(window.localStorage.getItem('register_for_notifs') == null)
+			{
+				pushNotification = window.plugins.pushNotification;
+				console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    register_for_notifs : no // ' + device.platform);
+				if ( device.platform == 'android' || device.platform == 'Android' || device.platform == "amazon-fireos" ){
+					pushNotification.register(successHandler,errorHandler,{"senderID":"804625540618","ecb":"onNotificationGCM"});
+				} else {
+					pushNotification.register(tokenHandler,errorHandler,{"badge":"true","sound":"true","alert":"true","ecb":"onNotificationGCM"});//"onNotificationAPN"});
+				}
+			}
+
+			function tokenHandler(result) {
+				console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    Notification Callback Success! Result (ios) = '+result);
+				//if(register_for_notifs){
+					$.ajax({ type: "POST",
+							url: "http://notif.smgroup.ir/SMCMS_notification/RegisterDeviceIDtoDB.php", 
+							data: {regID : result,user:window.localStorage.getItem('uuid'),OS:device.platform},
+							async: false,
+							success : function(text)
+							{
+								//last_articles_version = text;
+								console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    Notification registration text : ' + text);
+								if(text=="0")
+								{
+									window.localStorage.setItem('register_for_notifs','yes');
+								}
+							}
+					});
+				//}
+			}
+// END push Notification ///////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+		}
+		function uniqueDeviceIDsuccess_index(uuid)
+		{
+			window.localStorage.setItem('uuid',uuid);
+		};
+		function uniqueDeviceIDfail_index(uuid)
+		{
+			//alert("uniqueDeviceIDfail" + uuid);
+		};
+		
+		function loadcompeleted() {
+			$(".mypreload").html("");
+		}
+		$(window).load(function() {
+			$(".mypreload").html("");
+			
+		});
+
+		function go_back_index() {
+			navigator.notification.confirm(
+				'آیا تمایل به خروج از برنامه را دارید؟',	// message
+				onExitConfirm,								// callback
+				'توجه',										// title
+				['بله','خیر']								// buttonName
+			);
+		}
+		function onExitConfirm(buttonIndex) {
+			if(buttonIndex==1)
+			{
+				navigator.app.exitApp();
+				/*
+				if (navigator && navigator.app) {
+					navigator.app.exitApp();
+				} 
+				else {
+					if (navigator && navigator.device) {
+						navigator.device.exitApp();
+					}
+				}
+				*/
+			}
+			else
+			{
+				
+			}
+		}
+	</script>
+
+
+<style>
+
+
+</style>
+</head>
+<body onload="init()">
+	<div id="temp"></div>
+	<div id="exit-btn" onclick="exit();"></div>
+	<div id="header">
+		<div id="header-inner" class="header-text"></div>
+	</div>
+	<div id="footer">
+		<a href="send.html"><div id="info-footer"></div></a>
+	</div>
+	<div id="main">
+		<table id="dataTable-list" class="display" cellspacing="0" width="100%" >
+			<thead style="display:none;">
+				<tr>
+					<th class="logo">logo</th>
+					<th class="img-border">img-border</th>
+					<th	class="text">
+						text
+						date
+					</th>
+				</tr>
+			</thead>
+			<tbody id="mycontiner">
+
+					<tr>
+						<th class="logo"><div id="logo" class="blank"></div></th>
+						<th class="img-border"><div id="img-border-inner"></div></th>
+						<th	class="text">
+							<div id="text">رفع مشکل سرور dlsmgroup.ir0000</div>
+							<div id="date">17:24:28 -- 1394/06/21</div>
+						</th>
+					</tr>
+					<tr class="spacer"><th></th><th></th><th></th></tr>
+	
+					<tr>
+						<th class="logo"><div id="logo" class="blank"></div></th>
+						<th class="img-border"><div id="img-border-inner"></div></th>
+						<th	class="text">
+							<div id="text">مشکل در سرور dlsmgroup.ir0000</div>
+							<div id="date">17:23:46 -- 1394/06/21</div>
+						</th>
+					</tr>
+					<tr class="spacer"><th></th><th></th><th></th></tr>
+	
+					<tr>
+						<th class="logo"><div id="logo" class="blank"></div></th>
+						<th class="img-border"><div id="img-border-inner"></div></th>
+						<th	class="text">
+							<div id="text">رفع مشکل سرور dlsmgroup.ir000</div>
+							<div id="date">17:22:34 -- 1394/06/21</div>
+						</th>
+					</tr>
+					<tr class="spacer"><th></th><th></th><th></th></tr>
+	
+					<tr>
+						<th class="logo"><div id="logo" class="blank"></div></th>
+						<th class="img-border"><div id="img-border-inner"></div></th>
+						<th	class="text">
+							<div id="text">رفع خطا در سرور مبدل</div>
+							<div id="date">17:15:37 -- 1394/06/21</div>
+						</th>
+					</tr>
+					<tr class="spacer"><th></th><th></th><th></th></tr>
+	
+					<tr>
+						<th class="logo"><div id="logo" class="blank"></div></th>
+						<th class="img-border"><div id="img-border-inner"></div></th>
+						<th	class="text">
+							<div id="text">خطا در سرور مبدل<br/>http://ava.smgroup.ir/upload/hamshahri/FARKHAD94/6/21/3.ATASHBAGH/EB1B0580.jpg</div>
+							<div id="date">17:11:40 -- 1394/06/21</div>
+						</th>
+					</tr>
+					<tr class="spacer"><th></th><th></th><th></th></tr>
+	
+					<tr>
+						<th class="logo"><div id="logo" class="blank"></div></th>
+						<th class="img-border"><div id="img-border-inner"></div></th>
+						<th	class="text">
+							<div id="text">خطا در سرور مبدل<br/>http://ava.smgroup.ir/upload/hamshahri/FARKHAD94/6/21/3.ATASHBAGH/EB1B0580.jpg</div>
+							<div id="date">16:42:00 -- 1394/06/21</div>
+						</th>
+					</tr>
+					<tr class="spacer"><th></th><th></th><th></th></tr>
+	
+					<tr>
+						<th class="logo"><div id="logo" class="blank"></div></th>
+						<th class="img-border"><div id="img-border-inner"></div></th>
+						<th	class="text">
+							<div id="text">خطا در سرور مبدل</div>
+							<div id="date">16:39:01 -- 1394/06/21</div>
+						</th>
+					</tr>
+					<tr class="spacer"><th></th><th></th><th></th></tr>
+	
+					<tr>
+						<th class="logo"><div id="logo" class="blank"></div></th>
+						<th class="img-border"><div id="img-border-inner"></div></th>
+						<th	class="text">
+							<div id="text">خطا در سرور مبدل</div>
+							<div id="date">16:30:06 -- 1394/06/21</div>
+						</th>
+					</tr>
+					<tr class="spacer"><th></th><th></th><th></th></tr>
+	
+					<tr>
+						<th class="logo"><div id="logo" class="blank"></div></th>
+						<th class="img-border"><div id="img-border-inner"></div></th>
+						<th	class="text">
+							<div id="text">خطا در سرور مبدل</div>
+							<div id="date">16:29:56 -- 1394/06/21</div>
+						</th>
+					</tr>
+					<tr class="spacer"><th></th><th></th><th></th></tr>
+	
+					<tr>
+						<th class="logo"><div id="logo" class="blank"></div></th>
+						<th class="img-border"><div id="img-border-inner"></div></th>
+						<th	class="text">
+							<div id="text">خطا در سرور مبدل</div>
+							<div id="date">16:29:45 -- 1394/06/21</div>
+						</th>
+					</tr>
+					<tr class="spacer"><th></th><th></th><th></th></tr>
+	
+					<tr>
+						<th class="logo"><div id="logo" class="blank"></div></th>
+						<th class="img-border"><div id="img-border-inner"></div></th>
+						<th	class="text">
+							<div id="text">رفع خطا در سرور مبدل</div>
+							<div id="date">16:27:37 -- 1394/06/21</div>
+						</th>
+					</tr>
+					<tr class="spacer"><th></th><th></th><th></th></tr>
+	
+					<tr>
+						<th class="logo"><div id="logo" class="blank"></div></th>
+						<th class="img-border"><div id="img-border-inner"></div></th>
+						<th	class="text">
+							<div id="text">خطا در سرور مبدل</div>
+							<div id="date">16:23:31 -- 1394/06/21</div>
+						</th>
+					</tr>
+					<tr class="spacer"><th></th><th></th><th></th></tr>
+	
+					<tr>
+						<th class="logo"><div id="logo" class="blank"></div></th>
+						<th class="img-border"><div id="img-border-inner"></div></th>
+						<th	class="text">
+							<div id="text">رفع خطا در سرور مبدل</div>
+							<div id="date">16:22:27 -- 1394/06/21</div>
+						</th>
+					</tr>
+					<tr class="spacer"><th></th><th></th><th></th></tr>
+	
+					<tr>
+						<th class="logo"><div id="logo" class="blank"></div></th>
+						<th class="img-border"><div id="img-border-inner"></div></th>
+						<th	class="text">
+							<div id="text">رفع خطا در سرور مبدل</div>
+							<div id="date">16:22:13 -- 1394/06/21</div>
+						</th>
+					</tr>
+					<tr class="spacer"><th></th><th></th><th></th></tr>
+	
+					<tr>
+						<th class="logo"><div id="logo" class="blank"></div></th>
+						<th class="img-border"><div id="img-border-inner"></div></th>
+						<th	class="text">
+							<div id="text">سلام<br/>آقاسيد،مشكل برطرف شد؟</div>
+							<div id="date">22:26:01 -- 1394/06/20</div>
+						</th>
+					</tr>
+					<tr class="spacer"><th></th><th></th><th></th></tr>
+	
+					<tr>
+						<th class="logo"><div id="logo" class="blank"></div></th>
+						<th class="img-border"><div id="img-border-inner"></div></th>
+						<th	class="text">
+							<div id="text">اتوماتیک<br/>مشتری:موسسه همشهری<br/>مجموعه:Ruz940621<br/>نشریه:روزنامه همشهری</div>
+							<div id="date">22:24:40 -- 1394/06/20</div>
+						</th>
+					</tr>
+					<tr class="spacer"><th></th><th></th><th></th></tr>
+	
+					<tr>
+						<th class="logo"><div id="logo" class="blank"></div></th>
+						<th class="img-border"><div id="img-border-inner"></div></th>
+						<th	class="text">
+							<div id="text">درخواست<br/>مشتری:موسسه همشهری<br/>مجموعه:Ruz940621<br/>نشریه:روزنامه همشهری<br/>5</div>
+							<div id="date">22:19:20 -- 1394/06/20</div>
+						</th>
+					</tr>
+					<tr class="spacer"><th></th><th></th><th></th></tr>
+	
+					<tr>
+						<th class="logo"><div id="logo" class="blank"></div></th>
+						<th class="img-border"><div id="img-border-inner"></div></th>
+						<th	class="text">
+							<div id="text">سلام،  من با گوشیم نمیتونم چک کنم میزکار رو، صفحه اول همشهری دیروز میگه فایلش در سرور موجود نیست، هرکی دسترسی داره چک کنه. احمدرضا</div>
+							<div id="date">14:07:32 -- 1394/06/20</div>
+						</th>
+					</tr>
+					<tr class="spacer"><th></th><th></th><th></th></tr>
+	
+					<tr>
+						<th class="logo"><div id="logo" class="blank"></div></th>
+						<th class="img-border"><div id="img-border-inner"></div></th>
+						<th	class="text">
+							<div id="text">اتوماتیک<br/>مشتری:بانک مسکن<br/>مجموعه:هفته نامه شماره 572<br/>نشریه:نشریه بانک و مسکن</div>
+							<div id="date">13:32:35 -- 1394/06/19</div>
+						</th>
+					</tr>
+					<tr class="spacer"><th></th><th></th><th></th></tr>
+	
+					<tr>
+						<th class="logo"><div id="logo" class="blank"></div></th>
+						<th class="img-border"><div id="img-border-inner"></div></th>
+						<th	class="text">
+							<div id="text">درخواست<br/>مشتری:بانک مسکن<br/>مجموعه:هفته نامه شماره 572<br/>نشریه:نشریه بانک و مسکن<br/>1</div>
+							<div id="date">13:28:28 -- 1394/06/19</div>
+						</th>
+					</tr>
+					<tr class="spacer"><th></th><th></th><th></th></tr>
+	
+
+				<tr class="spacer"><th></th><th></th><th></th></tr>			
+				<tr class="spacer"><th></th><th></th><th></th></tr>
+			</tbody>
+		</table>
+<!--
+		<div id="notif">
+			<div id="logo" class="daneshgah"></div>
+		</div>
+		<table>
+			
+		</table>
+-->
+	</div>
+</body>
+</html>

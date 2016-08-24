@@ -2,7 +2,7 @@
 <widget xmlns = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "ir.smgroup.sms"
-        version   = "0.95">
+        version   = "0.96">
 		
 		
     <name>اطلاعیه ها</name>
@@ -47,13 +47,13 @@
     <gap:plugin name="org.apache.cordova.media-capture" source="npm" />
     <gap:plugin name="org.apache.cordova.console" source="npm" />
     <gap:plugin name="org.apache.cordova.device" source="npm" />
-    <gap:plugin name="org.apache.cordova.device-motion" source="npm" />
-    <gap:plugin name="org.apache.cordova.device-orientation" source="npm" />
+    <!--<gap:plugin name="org.apache.cordova.device-motion" source="npm" />-->
+    <!--<gap:plugin name="org.apache.cordova.device-orientation" source="npm" />-->
     <gap:plugin name="org.apache.cordova.dialogs" source="npm" />
     <gap:plugin name="org.apache.cordova.file" source="npm" />
     <!--<gap:plugin name="org.apache.cordova.file-transfer" source="npm" />-->
     <!--<gap:plugin name="org.apache.cordova.geolocation" source="npm" />-->
-    <gap:plugin name="org.apache.cordova.globalization" source="npm" />
+    <!--<gap:plugin name="org.apache.cordova.globalization" source="npm" />-->
     <gap:plugin name="org.apache.cordova.inappbrowser" source="npm" /><!---->
 	<gap:plugin name="org.apache.cordova.media" source="npm" />
     <gap:plugin name="org.apache.cordova.network-information" source="npm" />
@@ -85,7 +85,7 @@
 	</gap:config-file>
 	
 	<!--<gap:plugin name="com.dawsonloudon.videoplayer" 	platform="android"	version="1.0.0" />-->
-	<gap:plugin name="com.hutchind.cordova.plugins.streamingmedia"  source="plugins.cordova.io" />
+	<!--<gap:plugin name="com.hutchind.cordova.plugins.streamingmedia"  source="plugins.cordova.io" />-->
 
 	
     <!-- Define app icon      -->
