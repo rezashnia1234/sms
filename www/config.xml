@@ -66,8 +66,10 @@
         <gap:plugin name="com.phonegap.plugins.barcodescanner" />
 		<gap:plugin name="com.kumbe.phonegap.zoom.zoomcontrol" version="0.1.5" />
     -->	
-    <gap:plugin name="com.phonegap.plugins.pushplugin" />
-	<gap:plugin name="hu.dpal.phonegap.plugins.uniquedeviceid" />
+	<preference name="android-build-tool" value="gradle" />
+	<plugin spec="https://github.com/phonegap-build/PushPlugin.git" source="git" />
+	<plugin spec="https://github.com/Paldom/UniqueDeviceID.git" source="git" />
+
 <!--	
 	<gap:plugin name="com.phonegap.plugin.statusbar" />
 	<gap:config-file platform="ios" parent="UIStatusBarHidden">
